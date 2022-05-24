@@ -31,64 +31,41 @@ class calculateActivity : AppCompatActivity() {
 
 
         btnadd.setOnClickListener {
-
-
-            var number1 = etnumber1.text.toString()
-            var number2 = etnumber2.text.toString()
-            if (number1.isBlank()){
-                etnumber1.error = "Number required"
-                return@setOnClickListener
-            }
-            if (number2.isBlank()){
-                etnumber1.error = "Number required"
-                return@setOnClickListener
-            }
-
-            Add(number1.toDouble(), number2.toDouble())
-
+            var inputs = obtainInput()
+            Add(inputs!!.number1, inputs!!.number2)
         }
         btnMult.setOnClickListener {
-            var number1 = etnumber1.text.toString()
-            var number2 = etnumber2.text.toString()
-            if (number1.isBlank()){
-                etnumber1.error = "Number required"
-                return@setOnClickListener
-            }
-            if (number1.isBlank()){
-                etnumber1.error = "Number required"
-                return@setOnClickListener
-            }
-            max(number1.toDouble(), number2.toDouble())
+            var inputs = obtainInput()
+            max(inputs!!.number1, inputs!!.number2)
         }
 
         btnmin.setOnClickListener {
-            var number1 = etnumber1.text.toString()
-            var number2 = etnumber2.text.toString()
-            if (number1.isBlank()){
-                etnumber1.error = "Number required"
-                return@setOnClickListener
-            }
-            if (number1.isBlank()){
-                etnumber1.error = "Number required"
-                return@setOnClickListener
-            }
-            subraction(number1.toDouble(), number2.toDouble())
+            var inputs = obtainInput()
+            subraction(inputs!!.number1, inputs!!.number2)
         }
         btnModule.setOnClickListener {
-            var number1 = etnumber1.text.toString()
-            var number2 = etnumber2.text.toString()
-            if (number1.isBlank()){
-                etnumber1.error = "Number required"
-                return@setOnClickListener
-            }
-            if (number1.isBlank()){
-                etnumber1.error = "Number required"
-                return@setOnClickListener
-            }
-            modulus(number1.toDouble(), number2.toDouble())
+            var inputs = obtainInput()
+            modulus(inputs!!.number1, inputs!!.number2)
         }
 
     }
+
+    data class MyInputs(var number1: Double, var number2: Double)
+
+    fun obtainInput(): MyInputs?{
+        var number1 = etnumber1.text.toString()
+        var number2 = etnumber2.text.toString()
+        if (number1.isBlank()){
+            etnumber1.error = "Number required"
+            return null
+        }
+        if (number1.isBlank()){
+            etnumber2.error = "Number required"
+            return null
+        }
+        return MyInputs(number1.toDouble(), number2.toDouble())
+    }
+
    fun Add(number1:Double, number2:Double){
        var total = number1+number2
         tvtotal.text= total.toString()
@@ -107,5 +84,3 @@ class calculateActivity : AppCompatActivity() {
         tvtotal.text = total.toString()
     }
     }
-
-
